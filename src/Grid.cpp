@@ -38,7 +38,15 @@ Grid::Grid(std::vector<Coordinate> coordinates, double cellSize) {
     }
 };
 
-// std::vector<Coordinate> Grid::cellPoints(int x, int y);
+std::vector<Coordinate> Grid::cellPoints(int x, int y) {
+    if (this->cells.count(x) == 1 && this->cells[x].count(y) == 1) {
+        return this->cells[x][y];
+    } else {
+        std::vector<Coordinate> ret;
+        return ret;
+    }
+};
+
 // std::vector<Coordinate> Grid::rangePoints(std::vector<Coordinate> bbox);
 // std::vector<Coordinate> Grid::removeCoordinate(Coordinate coordinate);
 // double Grid::removeCoordinate(double val);

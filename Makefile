@@ -11,4 +11,6 @@ test:
 	g++ -Wall -Wextra -Werror src/Coordinate.cpp -o build/Coordinate.o -c
 	g++ -Wall -Wextra -Werror src/Grid.cpp -o build/Grid.o -c
 	g++ -Wall -Wextra -Werror tests/GridTest.cpp -o build/GridTest.o -c
-	g++ -Wall -Wextra -Werror -o build/test build/GridTest.o build/Coordinate.o build/Grid.o 
+
+	g++ -Wall -Wextra -Werror -o build/gridTest build/GridTest.o build/Coordinate.o build/Grid.o 
+	./build/gridTest
