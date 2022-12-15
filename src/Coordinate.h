@@ -12,6 +12,8 @@ class Coordinate {
         Coordinate(double x, double y);
         double getX();
         double getY();
+        void setX(const double x);
+	    void setY(const double y);
 };
 
 #endif
