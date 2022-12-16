@@ -10,7 +10,7 @@ std::vector<Coordinate> _upperTangent(std::vector<Coordinate>& pointSet) {
 
     std::vector<Coordinate> lower;
 
-    int l;
+    long unsigned int l;
 
     for (l=0; l < pointSet.size(); l++) {
         while(lower.size() >=2 && (_cross(lower[lower.size() - 2], lower[lower.size() - 1], pointSet[l]) <= 0)) {
@@ -27,7 +27,7 @@ std::vector<Coordinate> _lowerTangent(std::vector<Coordinate>& pointSet) {
     std::vector<Coordinate> reversedPointSet(pointSet.rbegin(), pointSet.rend());
     std::vector<Coordinate> upper;
 
-    int u;
+    long unsigned int u;
 
     for (u=0; u<reversedPointSet.size(); u++) {
         while (upper.size() >= 2 && (_cross(upper[upper.size() - 2], upper[upper.size() - 1], reversedPointSet[u]) <= 0)) {

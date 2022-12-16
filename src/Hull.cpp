@@ -33,6 +33,8 @@ bool compareXCoordinate(Coordinate a, Coordinate b) {
 std::vector<Coordinate> sortByX(std::vector<Coordinate> pointSet) {
 
     std::sort(pointSet.begin(), pointSet.end(), compareXCoordinate);
+    std::cout << "sortByX" << std::endl;
+
     return pointSet;
 };
 
@@ -63,8 +65,8 @@ bool h_intersect(std::vector<Coordinate> segment, std::vector<Coordinate> pointS
         seg.push_back(pointSet[i]);
         seg.push_back(pointSet[i+1]);
 
-        if (segment[0].getX() == seg[0].getX() && segment[0].getY() == seg[0].getY() ||
-            segment[0].getX() == seg[1].getX() && segment[0].getY() == seg[1].getY()) {
+        if (((segment[0].getX() == seg[0].getX()) && (segment[0].getY() == seg[0].getY())) ||
+            ((segment[0].getX() == seg[1].getX()) && (segment[0].getY() == seg[1].getY()))) {
             continue;
         }
 
@@ -81,7 +83,7 @@ Coordinate h_occupiedArea(std::vector<Coordinate> pointSet) {
     double maxX = std::numeric_limits<double>::max();
     double maxY = std::numeric_limits<double>::max();
 
-    unsigned long int i;
+    long int i;
 
     for (i=pointSet.size()-1; i>=0; i--) {
         if (pointSet[i].getX() < minX) {
@@ -99,6 +101,7 @@ Coordinate h_occupiedArea(std::vector<Coordinate> pointSet) {
     }
 
     Coordinate ret = Coordinate(maxX - minX, maxY - minY);
+    return ret;
 }
 
 std::vector<double> h_bBoxAround(std::vector<Coordinate> edge) {
@@ -193,7 +196,11 @@ std::vector<Coordinate> hull(std::vector<Coordinate> pointSet, int concavity) {
 
     int maxEdgeLen = concavity;
 
+    std::cout << "FILTERED" << std::endl;
+
     std::vector<Coordinate> points = filterDuplicates(sortByX(pointSet));
+
+    std::cout << "FILTERED" << std::endl;
 
     if (points.size() < 4) {
 
