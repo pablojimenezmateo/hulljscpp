@@ -5,11 +5,10 @@
 int main() {
 
     std::cout << "Running hull tests" << std::endl;
-    int passed=0, total=5;
+    int passed=0, total=7;
 
     std::vector<Coordinate> points, expected, result;
 
-    // [[16,3], [12,17],[0,6],[-4,-6]]
     points.push_back(Coordinate(16, 3)); 
     points.push_back(Coordinate(12, 17)); 
     points.push_back(Coordinate(0, 6)); 
@@ -98,7 +97,7 @@ int main() {
         
         return -1;
     }
-    
+
     passed++;
 
     points.clear();
@@ -251,6 +250,171 @@ int main() {
         return -1;
     }
     passed++;
+
+    points.clear();
+    expected.clear();
+
+    points.push_back(Coordinate(141, 408));
+    points.push_back(Coordinate(160, 400));
+    points.push_back(Coordinate(177, 430));
+    points.push_back(Coordinate(151, 442));
+    points.push_back(Coordinate(155, 425));
+    points.push_back(Coordinate(134, 430));
+    points.push_back(Coordinate(126, 447));
+    points.push_back(Coordinate(139, 466));
+    points.push_back(Coordinate(160, 471));
+    points.push_back(Coordinate(167, 447));
+    points.push_back(Coordinate(182, 466));
+    points.push_back(Coordinate(192, 442));
+    points.push_back(Coordinate(187, 413));
+    points.push_back(Coordinate(173, 403));
+    points.push_back(Coordinate(165, 430));
+    points.push_back(Coordinate(171, 430));
+    points.push_back(Coordinate(177, 437));
+    points.push_back(Coordinate(175, 443));
+    points.push_back(Coordinate(172, 444));
+    points.push_back(Coordinate(163, 448));
+    points.push_back(Coordinate(156, 447));
+    points.push_back(Coordinate(153, 438));
+    points.push_back(Coordinate(154, 431));
+    points.push_back(Coordinate(160, 428));
+
+    expected.push_back(Coordinate(192,442));
+    expected.push_back(Coordinate(182,466));
+    expected.push_back(Coordinate(160,471));
+    expected.push_back(Coordinate(139,466));
+    expected.push_back(Coordinate(126,447));
+    expected.push_back(Coordinate(141,408));
+    expected.push_back(Coordinate(160,400));
+    expected.push_back(Coordinate(173,403));
+    expected.push_back(Coordinate(187,413));
+    expected.push_back(Coordinate(192,442));
+
+    result = hull(points, 50);
+
+    if (result != expected) {
+
+        std::cout << "[FAILED] hull, expected [";
+        
+        for(Coordinate c : expected) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "] Got [";
+
+        for(Coordinate c : result) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
+    points.clear();
+    expected.clear();
+
+    points.push_back(Coordinate(141, 408));
+    points.push_back(Coordinate(160, 400));
+    points.push_back(Coordinate(177, 430));
+
+    expected.push_back(Coordinate(141, 408));
+    expected.push_back(Coordinate(160, 400));
+    expected.push_back(Coordinate(177, 430));
+    expected.push_back(Coordinate(141, 408));
+
+    result = hull(points, 50);
+
+    if (result != expected) {
+
+        std::cout << "[FAILED] hull, expected [";
+        
+        for(Coordinate c : expected) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "] Got [";
+
+        for(Coordinate c : result) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
+    points.clear();
+    expected.clear();
+
+    points.push_back(Coordinate(141, 408));
+    points.push_back(Coordinate(160, 400));
+    points.push_back(Coordinate(141, 408));
+
+    expected.push_back(Coordinate(141, 408));
+    expected.push_back(Coordinate(160, 400));
+    expected.push_back(Coordinate(141, 408));
+
+    result = hull(points, 50);
+
+    if (result != expected) {
+
+        std::cout << "[FAILED] hull, expected [";
+        
+        for(Coordinate c : expected) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "] Got [";
+
+        for(Coordinate c : result) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
+
+    points.clear();
+    expected.clear();
+
+    points.push_back(Coordinate(141, 408));
+    points.push_back(Coordinate(160, 400));
+    points.push_back(Coordinate(177, 430));
+    points.push_back(Coordinate(141, 408));
+
+    expected.push_back(Coordinate(141, 408));
+    expected.push_back(Coordinate(160, 400));
+    expected.push_back(Coordinate(177, 430));
+    expected.push_back(Coordinate(141, 408));
+
+    result = hull(points, 50);
+
+    if (result != expected) {
+
+        std::cout << "[FAILED] hull, expected [";
+        
+        for(Coordinate c : expected) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "] Got [";
+
+        for(Coordinate c : result) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
 
     std::cout << "[CORRECT] hull [" << passed << "/" << total << "]" << std::endl;
     return 0;

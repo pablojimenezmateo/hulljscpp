@@ -202,7 +202,7 @@ std::vector<Coordinate> hull(std::vector<Coordinate> pointSet, int concavity) {
     if (points.size() < 4) {
 
         std::vector<Coordinate> concave = points;
-        points.push_back(points[0]);
+        concave.push_back(points[0]);
 
         return concave;
     }
