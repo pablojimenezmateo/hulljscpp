@@ -13,6 +13,7 @@ test:
 	g++ -Wall -Wextra -Werror src/Intersect.cpp -o build/Intersect.o -c
 	g++ -Wall -Wextra -Werror src/Hull.cpp -o build/Hull.o -c
 	g++ -Wall -Wextra -Werror src/Convex.cpp -o build/Convex.o -c
+	g++ -Wall -Wextra -Werror src/Utils.cpp -o build/Utils.o -c
 
 	g++ -Wall -Wextra -Werror tests/GridTest.cpp -o build/GridTest.o -c
 	g++ -Wall -Wextra -Werror tests/IntersectTest.cpp -o build/IntersectTest.o -c
@@ -24,5 +25,5 @@ test:
 	g++ -Wall -Wextra -Werror -o build/intersectTest build/IntersectTest.o build/Coordinate.o build/Intersect.o 
 	./build/intersectTest
 
-	g++ -Wall -Wextra -Werror -o build/HullTest build/HullTest.o build/Coordinate.o build/Hull.o build/Intersect.o build/Grid.o build/Convex.o
+	g++ -Wall -Wextra -Werror -o build/HullTest build/HullTest.o build/Coordinate.o build/Hull.o build/Intersect.o build/Grid.o build/Convex.o build/Utils.o
 	./build/HullTest

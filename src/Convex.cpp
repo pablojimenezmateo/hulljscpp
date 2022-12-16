@@ -1,5 +1,5 @@
 #include "Convex.h"
-#include <algorithm>
+#include "Utils.h"
 
 double _cross(Coordinate o, Coordinate a, Coordinate b) {
 
@@ -48,7 +48,6 @@ std::vector<Coordinate> convex(std::vector<Coordinate>& pointSet) {
     // Copy lower into convex
     std::vector<Coordinate> convex(lower.begin(), lower.end());
     convex.insert(convex.end(), upper.begin(), upper.end());
-    convex.push_back(pointSet[0]);
-
+    convex.push_back(pointSet[pointSet.size() - 1]);
     return convex;
 };

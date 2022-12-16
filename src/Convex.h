@@ -3,6 +3,7 @@
 
 #include "Coordinate.h"
 #include <vector>
+#include <algorithm>
 
 std::vector<Coordinate> convex(std::vector<Coordinate>& pointSet);
 

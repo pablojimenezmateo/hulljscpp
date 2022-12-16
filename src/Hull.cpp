@@ -1,6 +1,5 @@
 #include "Hull.h"
 
-
 std::vector<Coordinate> filterDuplicates(std::vector<Coordinate> pointSet) {
 
     std::vector<Coordinate> unique;
@@ -27,14 +26,18 @@ std::vector<Coordinate> filterDuplicates(std::vector<Coordinate> pointSet) {
 
 bool compareXCoordinate(Coordinate a, Coordinate b) {
 
-    return (a.getX() - b.getX()) || (a.getY() - b.getY());
+    if (a.getX() == b.getX()) {
+
+        return a.getY() < b.getY();
+        
+    } else {
+        return a.getX() <= b.getX();
+    }
 };
 
 std::vector<Coordinate> sortByX(std::vector<Coordinate> pointSet) {
 
     std::sort(pointSet.begin(), pointSet.end(), compareXCoordinate);
-    std::cout << "sortByX" << std::endl;
-
     return pointSet;
 };
 
@@ -78,10 +81,10 @@ bool h_intersect(std::vector<Coordinate> segment, std::vector<Coordinate> pointS
 }
 
 Coordinate h_occupiedArea(std::vector<Coordinate> pointSet) {
-    double minX = std::numeric_limits<double>::min();
-    double minY = std::numeric_limits<double>::min();
-    double maxX = std::numeric_limits<double>::max();
-    double maxY = std::numeric_limits<double>::max();
+    double minX = std::numeric_limits<double>::max();
+    double minY = std::numeric_limits<double>::max();
+    double maxX = std::numeric_limits<double>::min();
+    double maxY = std::numeric_limits<double>::min();
 
     long int i;
 
@@ -147,7 +150,7 @@ std::vector<Coordinate> h_concave(std::vector<Coordinate> convex, double maxSqEd
     bool midPointInserted = false, foundMidpoint = false;
     unsigned long int i;
 
-    for (i=0; i < convex.size(); i++) {
+    for (i=0; i < convex.size()-1; i++) {
 
         std::vector<Coordinate> edge = {convex[i], convex[i + 1]};
 
@@ -177,8 +180,6 @@ std::vector<Coordinate> h_concave(std::vector<Coordinate> convex, double maxSqEd
         }
 
         if (foundMidpoint == true) {
-            // TODO: Failure point (?)
-            //convex.splice(i + 1, 0, midPoint);
             convex.insert(convex.begin() + i + 1, midPoint);
             grid.removeCoordinate(midPoint);
             midPointInserted = true;
@@ -196,11 +197,7 @@ std::vector<Coordinate> hull(std::vector<Coordinate> pointSet, int concavity) {
 
     int maxEdgeLen = concavity;
 
-    std::cout << "FILTERED" << std::endl;
-
     std::vector<Coordinate> points = filterDuplicates(sortByX(pointSet));
-
-    std::cout << "FILTERED" << std::endl;
 
     if (points.size() < 4) {
 
@@ -227,6 +224,9 @@ std::vector<Coordinate> hull(std::vector<Coordinate> pointSet, int concavity) {
             innerPoints.push_back(c);
         }
     }
+
+    // JS has this reversed
+    std::reverse(innerPoints.begin(), innerPoints.end());
 
     double cellSize = std::ceil(1/(points.size() / (occupiedArea.getX() * occupiedArea.getY())));
 
