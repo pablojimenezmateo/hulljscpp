@@ -18,16 +18,16 @@
 const double MAX_CONCAVE_ANGLE_COS = std::cos(90 / (180 / M_PI)); // angle = 90 deg
 const double MAX_SEARCH_BBOX_SIZE_PERCENT = 0.6;
 
-std::vector<Coordinate> filterDuplicates(std::vector<Coordinate> pointSet);
+std::vector<Coordinate> filterDuplicates(std::vector<Coordinate> coordinates);
 bool compareXCoordinate(Coordinate a, Coordinate b);
-std::vector<Coordinate> sortByX(std::vector<Coordinate> pointSet);
+std::vector<Coordinate> sortByX(std::vector<Coordinate> coordinates);
 double sqLength(Coordinate a, Coordinate b);
 double cos(Coordinate o, Coordinate a, Coordinate b);
-bool h_intersect(std::vector<Coordinate> segment, std::vector<Coordinate> pointSet);
-Coordinate h_occupiedArea(std::vector<Coordinate> pointSet);
+bool h_intersect(std::vector<Coordinate> segment, std::vector<Coordinate> coordinates);
+Coordinate h_occupiedArea(std::vector<Coordinate> coordinates);
 std::vector<double> h_bBoxAround(std::vector<Coordinate> edge);
 std::tuple<bool, Coordinate> h_midPoint(std::vector<Coordinate> edge, std::vector<Coordinate> innerPoints, std::vector<Coordinate> convex);
 std::vector<Coordinate> h_concave(std::vector<Coordinate> convex, double maxSqEdgeLen, Coordinate maxSearchArea, Grid grid, std::set<std::string> edgeSkipList);
-std::vector<Coordinate> hull(std::vector<Coordinate> pointSet, int concavity);
+std::vector<Coordinate> hull(std::vector<Coordinate> coordinates, int concavity);
 
 #endif
