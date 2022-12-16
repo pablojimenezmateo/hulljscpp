@@ -16,11 +16,11 @@ class Grid {
     public:
         Grid(std::vector<Coordinate> coordinates, double cellSize);
         std::vector<Coordinate> cellPoints(int x, int y);
-        std::vector<Coordinate> rangePoints(std::vector<int> bbox);
+        std::vector<Coordinate> rangePoints(std::vector<double> bbox);
         std::vector<Coordinate> removeCoordinate(Coordinate coordinate);
         int trunc(double val);
         int coordToCellNum(double x);
-        std::vector<int> extendBbox(std::vector<int> bbox, int scaleFactor);
+        std::vector<double> extendBbox(std::vector<double> bbox, int scaleFactor);
 };
 
 #endif

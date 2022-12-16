@@ -221,13 +221,13 @@ int extendBboxTest(Grid g) {
     std::cout << "Running extendBbox tests" << std::endl;
     int passed=0, total=2;
 
-    std::vector<int> test;
+    std::vector<double> test;
     test.push_back(-10);
     test.push_back(-10);
     test.push_back(21);
     test.push_back(21);
 
-    std::vector<int> result = g.extendBbox({0, 0, 11, 11}, 1);
+    std::vector<double> result = g.extendBbox({0, 0, 11, 11}, 1);
     if (result != test) {
 
         std::cout << "[FAILED] g.extendBbox({0, 0, 11, 11}, 1), expected [";

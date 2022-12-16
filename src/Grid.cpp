@@ -47,7 +47,7 @@ std::vector<Coordinate> Grid::cellPoints(int x, int y) {
     }
 };
 
-std::vector<Coordinate> Grid::rangePoints(std::vector<int> bbox) {
+std::vector<Coordinate> Grid::rangePoints(std::vector<double> bbox) {
 
     long unsigned int i;
     int x, y;
@@ -89,7 +89,7 @@ int Grid::coordToCellNum(double x) {
     return this->trunc(x * this->reverseCellSize);
 };
 
-std::vector<int> Grid::extendBbox(std::vector<int> bbox, int scaleFactor) {
+std::vector<double> Grid::extendBbox(std::vector<double> bbox, int scaleFactor) {
 
     int factor = scaleFactor * this->cellSize;
 
