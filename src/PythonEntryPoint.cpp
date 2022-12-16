@@ -37,6 +37,10 @@ extern "C" {
 
 	double getHullArea(Coordinate* hull, int len) {
 
+		if (len < 3) {
+			return 0;
+		}
+
 		// Convert Coordinate* to vector<Coordinate>
 		std::vector<Coordinate> hullPoints(hull, hull+len);
 
@@ -56,6 +60,11 @@ extern "C" {
 
 	// Function to return the perimeter of the convex hull
 	double getHullPerimeter(Coordinate* hull, int len) {
+
+		if (len < 3) {
+			return 0;
+		}
+
 		// Convert Coordinate* to vector<Coordinate>
 		std::vector<Coordinate> hullPoints(hull, hull+len);
 

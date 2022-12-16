@@ -195,6 +195,13 @@ std::vector<Coordinate> h_concave(std::vector<Coordinate> convex, double maxSqEd
 
 std::vector<Coordinate> hull(std::vector<Coordinate> coordinates, int concavity) {
 
+    // Safety check
+    if (coordinates.size() < 3) {
+
+        std::vector<Coordinate> ret;
+        return ret;
+    }
+
     int maxEdgeLen = concavity;
 
     std::vector<Coordinate> coord = filterDuplicates(sortByX(coordinates));
