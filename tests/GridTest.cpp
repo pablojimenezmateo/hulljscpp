@@ -2,46 +2,20 @@
 #include "../src/Coordinate.h"
 #include <iostream>
 
-int main() {
-
-    std::vector<Coordinate> coordinates;
-
-    // cell 0,0
-    coordinates.push_back(Coordinate(0, 0));
-    coordinates.push_back(Coordinate(1, 1));
-    coordinates.push_back(Coordinate(9, 5));
-
-    // cell 0,1
-    coordinates.push_back(Coordinate(1, 11));
-    coordinates.push_back(Coordinate(5, 15));
-
-    // cell 1,0
-    coordinates.push_back(Coordinate(11, 0));
-    coordinates.push_back(Coordinate(11, 1));
-    coordinates.push_back(Coordinate(19, 5));
-
-    // cell 1,1
-    coordinates.push_back(Coordinate(10, 10));
-    coordinates.push_back(Coordinate(11, 11));
-
-    Grid g = Grid(coordinates, 10);
-    int passed, total;
-
-
+int cellPointsTest(Grid g) {
     /*
      cellPoints
     */
     std::cout << "Running cellPoints tests" << std::endl;
-    passed = 0;
-    total = 4;
+    int passed=0, total=4;
 
     std::vector<Coordinate> test;
     test.push_back(Coordinate(0, 0));
     test.push_back(Coordinate(1, 1));
     test.push_back(Coordinate(9, 5));
 
-    std::vector<Coordinate> result_c = g.cellPoints(0, 0);
-    if (result_c != test) {
+    std::vector<Coordinate> result = g.cellPoints(0, 0);
+    if (result != test) {
 
         std::cout << "[FAILED] g.cellPoints(0, 0), expected [";
         
@@ -51,7 +25,7 @@ int main() {
 
         std::cout << "] Got [";
 
-        for(Coordinate c : result_c) {
+        for(Coordinate c : result) {
             std::cout << c.toString();
         }
 
@@ -65,8 +39,8 @@ int main() {
     test.push_back(Coordinate(1, 11));
     test.push_back(Coordinate(5, 15));
 
-    result_c = g.cellPoints(0, 1);
-    if (result_c != test) {
+    result = g.cellPoints(0, 1);
+    if (result != test) {
 
         std::cout << "[FAILED] g.cellPoints(0, 1), expected [";
         
@@ -76,7 +50,7 @@ int main() {
 
         std::cout << "] Got [";
 
-        for(Coordinate c : result_c) {
+        for(Coordinate c : result) {
             std::cout << c.toString();
         }
 
@@ -91,8 +65,8 @@ int main() {
     test.push_back(Coordinate(11, 1));
     test.push_back(Coordinate(19, 5));
 
-    result_c = g.cellPoints(1, 0);
-    if (result_c != test) {
+    result = g.cellPoints(1, 0);
+    if (result != test) {
 
         std::cout << "[FAILED] g.cellPoints(0, 1), expected [";
         
@@ -102,7 +76,7 @@ int main() {
 
         std::cout << "] Got [";
 
-        for(Coordinate c : result_c) {
+        for(Coordinate c : result) {
             std::cout << c.toString();
         }
 
@@ -116,8 +90,8 @@ int main() {
     test.push_back(Coordinate(10, 10));
     test.push_back(Coordinate(11, 11));
 
-    result_c = g.cellPoints(1, 1);
-    if (result_c != test) {
+    result = g.cellPoints(1, 1);
+    if (result != test) {
 
         std::cout << "[FAILED] g.cellPoints(0, 1), expected [";
         
@@ -127,7 +101,7 @@ int main() {
 
         std::cout << "] Got [";
 
-        for(Coordinate c : result_c) {
+        for(Coordinate c : result) {
             std::cout << c.toString();
         }
 
@@ -138,16 +112,18 @@ int main() {
     passed++;
 
     std::cout << "[CORRECT] cellPoints [" << passed << "/" << total << "]" << std::endl;
+    return 0;
+}
 
+int coordToCellNumTest(Grid g) {
     /*
      coordToCellNum
     */
     std::cout << "Running coordToCellNum tests" << std::endl;
 
-    passed = 0;
-    total = 4;
+    int passed=0, total=4;
 
-    double result = g.coordToCellNum(1);
+    int result = g.coordToCellNum(1);
     if (result != 0) {
 
         std::cout << "[FAILED] g.coordToCellNum(1), expected 0 got " << result << std::endl;
@@ -181,4 +157,93 @@ int main() {
     passed++;
 
     std::cout << "[CORRECT] coordToCellNum [" << passed << "/" << total << "]" << std::endl;
+    return 0;
+}
+
+int rangePointsTest(Grid g, std::vector<Coordinate> coordinates) {
+    std::cout << "Running rangePoints tests" << std::endl;
+    int passed=0, total=2;
+
+    std::vector<Coordinate> test;
+    test.push_back(Coordinate(0, 0));
+    test.push_back(Coordinate(1, 1));
+    test.push_back(Coordinate(9, 5));
+    test.push_back(Coordinate(1, 11));
+    test.push_back(Coordinate(5, 15));
+
+    std::vector<Coordinate> result = g.rangePoints({1, 0, 6, 16});
+    if (result != test) {
+
+        std::cout << "[FAILED] g.rangePoints({1, 0, 6, 16}), expected [";
+        
+        for(Coordinate c : test) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "] Got [";
+
+        for(Coordinate c : result) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
+    result = g.rangePoints({0, 0, 11, 11});
+    if (result != coordinates) {
+
+        std::cout << "[FAILED] g.rangePoints({1, 0, 6, 16}), expected [";
+        
+        for(Coordinate c : coordinates) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "] Got [";
+
+        for(Coordinate c : result) {
+            std::cout << c.toString();
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
+    std::cout << "[CORRECT] rangePoints [" << passed << "/" << total << "]" << std::endl;
+    return 0;
+}
+
+
+int main() {
+
+    std::vector<Coordinate> coordinates;
+
+    // cell 0,0
+    coordinates.push_back(Coordinate(0, 0));
+    coordinates.push_back(Coordinate(1, 1));
+    coordinates.push_back(Coordinate(9, 5));
+
+    // cell 0,1
+    coordinates.push_back(Coordinate(1, 11));
+    coordinates.push_back(Coordinate(5, 15));
+
+    // cell 1,0
+    coordinates.push_back(Coordinate(11, 0));
+    coordinates.push_back(Coordinate(11, 1));
+    coordinates.push_back(Coordinate(19, 5));
+
+    // cell 1,1
+    coordinates.push_back(Coordinate(10, 10));
+    coordinates.push_back(Coordinate(11, 11));
+
+    Grid g = Grid(coordinates, 10);
+    
+    cellPointsTest(g);
+    coordToCellNumTest(g);
+    rangePointsTest(g, coordinates);
+
 }

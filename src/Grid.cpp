@@ -47,14 +47,35 @@ std::vector<Coordinate> Grid::cellPoints(int x, int y) {
     }
 };
 
-// std::vector<Coordinate> Grid::rangePoints(std::vector<Coordinate> bbox);
+std::vector<Coordinate> Grid::rangePoints(std::vector<int> bbox) {
+
+    long unsigned int i;
+    int x, y;
+    int tlCellX = this->coordToCellNum(bbox[0]);
+    int tlCellY = this->coordToCellNum(bbox[1]);
+    int brCellX = this->coordToCellNum(bbox[2]);
+    int brCellY = this->coordToCellNum(bbox[3]);
+
+    std::vector<Coordinate> coordinates; 
+
+    for (x = tlCellX; x <= brCellX; x++) {
+        for (y = tlCellY; y <= brCellY; y++) {
+            for (i = 0; i < this->cellPoints(x, y).size(); i++) {
+                coordinates.push_back(this->cellPoints(x, y)[i]);
+            }
+        }
+    }
+
+    return coordinates;
+};
+
 // std::vector<Coordinate> Grid::removeCoordinate(Coordinate coordinate);
-// double Grid::removeCoordinate(double val);
-double Grid::trunc(double val) {
+// Coordinate Grid::removeCoordinate(double val);
+int Grid::trunc(double val) {
     return std::trunc(val);
 };
 
-double Grid::coordToCellNum(double x) {
+int Grid::coordToCellNum(double x) {
     return this->trunc(x * this->reverseCellSize);
 };
 
