@@ -217,6 +217,68 @@ int rangePointsTest(Grid g, std::vector<Coordinate> coordinates) {
     return 0;
 }
 
+int extendBboxTest(Grid g) {
+    std::cout << "Running extendBbox tests" << std::endl;
+    int passed=0, total=2;
+
+    std::vector<int> test;
+    test.push_back(-10);
+    test.push_back(-10);
+    test.push_back(21);
+    test.push_back(21);
+
+    std::vector<int> result = g.extendBbox({0, 0, 11, 11}, 1);
+    if (result != test) {
+
+        std::cout << "[FAILED] g.extendBbox({0, 0, 11, 11}, 1), expected [";
+        
+        for(int c : test) {
+            std::cout << c << " ";
+        }
+
+        std::cout << "] Got [";
+
+        for(int c : result) {
+            std::cout << c << " ";
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
+    test.clear();
+    test.push_back(-20);
+    test.push_back(-20);
+    test.push_back(31);
+    test.push_back(31);
+
+    result = g.extendBbox({0, 0, 11, 11}, 2);
+    if (result != test) {
+
+        std::cout << "[FAILED] g.extendBbox({0, 0, 11, 11}, 2), expected [";
+        
+        for(int c : test) {
+            std::cout << c;
+        }
+
+        std::cout << "] Got [";
+
+        for(int c : result) {
+            std::cout << c;
+        }
+
+        std::cout << "]" << std::endl;
+        
+        return -1;
+    }
+    passed++;
+
+    std::cout << "[CORRECT] extendBbox [" << passed << "/" << total << "]" << std::endl;
+    return 0;
+}
+
 
 int main() {
 
@@ -245,5 +307,6 @@ int main() {
     cellPointsTest(g);
     coordToCellNumTest(g);
     rangePointsTest(g, coordinates);
+    extendBboxTest(g);
 
 }

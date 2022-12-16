@@ -69,8 +69,18 @@ std::vector<Coordinate> Grid::rangePoints(std::vector<int> bbox) {
     return coordinates;
 };
 
-// std::vector<Coordinate> Grid::removeCoordinate(Coordinate coordinate);
-// Coordinate Grid::removeCoordinate(double val);
+std::vector<Coordinate> Grid::removeCoordinate(Coordinate coordinate) {
+
+    int cellX = this->coordToCellNum(coordinate.getX());
+    int cellY = this->coordToCellNum(coordinate.getY());
+
+    std::vector<Coordinate> cell = this->cells[cellX][cellY];
+
+    cell.erase(std::remove(cell.begin(), cell.end(), coordinate), cell.end());
+
+    return cell;
+};
+
 int Grid::trunc(double val) {
     return std::trunc(val);
 };
@@ -79,4 +89,9 @@ int Grid::coordToCellNum(double x) {
     return this->trunc(x * this->reverseCellSize);
 };
 
-// BoundingBox Grid::extendBbox(BoundingBox bbox, double scaleFactor);
+std::vector<int> Grid::extendBbox(std::vector<int> bbox, int scaleFactor) {
+
+    int factor = scaleFactor * this->cellSize;
+
+    return {bbox[0] - factor, bbox[1] - factor, bbox[2] + factor, bbox[3] + factor};
+};
