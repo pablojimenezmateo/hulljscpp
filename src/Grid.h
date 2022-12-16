@@ -1,9 +1,10 @@
 #ifndef GRID_H
 #define GRID_H
+#include "Coordinate.h"
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "Coordinate.h"
+#include <cmath>
 
 class Grid {
 

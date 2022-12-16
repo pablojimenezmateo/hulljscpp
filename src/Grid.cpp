@@ -1,5 +1,4 @@
 #include "Grid.h"
-#include <cmath>
 
 Grid::Grid(std::vector<Coordinate> coordinates, double cellSize) {
 

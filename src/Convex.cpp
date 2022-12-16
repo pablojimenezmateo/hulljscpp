@@ -1,5 +1,4 @@
 #include "Convex.h"
-#include "Utils.h"
 
 double _cross(Coordinate o, Coordinate a, Coordinate b) {
 
