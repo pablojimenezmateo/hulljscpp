@@ -2,6 +2,12 @@
 .PHONY: build
 
 build:
+	g++ -fPIC -Wall -Wextra -Werror -shared -o convex_hull.so src/Coordinate.cpp src/Grid.cpp src/Intersect.cpp src/Hull.cpp src/Convex.cpp
+
+buildpython:
+	g++ -fPIC -Wall -Wextra -Werror -shared -o convex_hull.so src/Coordinate.cpp src/Grid.cpp src/Intersect.cpp src/Hull.cpp misc/PythonEntryPoint.cpp src/Convex.cpp
+
+standalone:
 	mkdir -p build
 	g++ -Wall -Wextra -Werror src/Coordinate.cpp -o build/Coordinate.o -c
 	g++ -Wall -Wextra -Werror src/Grid.cpp -o build/Grid.o -c
@@ -9,16 +15,13 @@ build:
 	g++ -Wall -Wextra -Werror src/Hull.cpp -o build/Hull.o -c
 	g++ -Wall -Wextra -Werror src/Convex.cpp -o build/Convex.o -c
 	g++ -Wall -Wextra -Werror src/Utils.cpp -o build/Utils.o -c
-	g++ -Wall -Wextra -Werror src/Main.cpp -o build/Main.o -c
+	g++ -Wall -Wextra -Werror misc/Main.cpp -o build/Main.o -c
 
 	g++ -Wall -Wextra -Werror -o build/main build/Coordinate.o build/Grid.o build/Main.o build/Utils.o build/Hull.o build/Intersect.o build/Convex.o
 
-shared:
-	g++ -fPIC -Wall -Wextra -Werror -shared -o convex_hull.so src/Coordinate.cpp src/Grid.cpp src/Intersect.cpp src/Hull.cpp src/PythonEntryPoint.cpp src/Convex.cpp
-
 clean:
-	rm build/*
-	rm convex_hull.so
+	rm -rf build
+	rm -f convex_hull.so
 
 test:
 	mkdir -p build

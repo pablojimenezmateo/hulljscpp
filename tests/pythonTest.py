@@ -1,8 +1,9 @@
 def getHullData(coordinates):
     """
-    This function takes a list of coordinates and returns the convex hull, area and perimeter.
-    The coordinates are expected to be a list of lists, where each sublist contains two numbers.
-    The first number is the x coordinate and the second number is the y coordinate.
+    This function takes a list of coordinates and returns the convex hull,
+    area and perimeter. The coordinates are expected to be a list of lists,
+    where each sublist contains two numbers. The first number is the x
+    coordinate and the second number is the y coordinate.
     The function returns a tuple of three elements:
     - The first element is a list of coordinates that form the convex hull.
     - The second element is the area of the convex hull.
@@ -10,6 +11,7 @@ def getHullData(coordinates):
     """
 
     import os
+    import sys
     from ctypes import CDLL, POINTER, Structure, c_double, c_int, c_ulong, cast
     from pathlib import Path
 
@@ -23,7 +25,14 @@ def getHullData(coordinates):
         _fields_ = [("m_x", c_double), ("m_y", c_double)]
 
     # Here we need to define the signatures of the methods
-    convex_hull = CDLL(shared_library_path)
+    try:
+        convex_hull = CDLL(shared_library_path)
+    except OSError:
+        print(
+            f"Library not found in path {shared_library_path}, maybe you forgot to build it?"
+        )
+        sys.exit(-1)
+
     convex_hull.getConvexHull.argtypes = [POINTER(Coordinate), c_int, POINTER(c_ulong)]
     convex_hull.getConvexHull.restype = POINTER(Coordinate)
     convex_hull.freeHull.argtypes = [POINTER(Coordinate)]

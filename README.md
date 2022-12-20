@@ -9,19 +9,26 @@ It also comes with bindings and an example on how to execute it from Python.
 
 # Usage
 
-## Normal
+## Library
 ```
-# Builds the program with the main in src/Main.cpp
 make
+
+# It will create the file convex_hull.so
+```
+
+## Standalone
+```
+# Builds the program with the main in misc/Main.cpp
+make standalone
 
 # Execute it
 ./build/main
 ```
 
-## Python
+## With Python bindings
 ```
-# Builds the shared library
-make shared
+# Builds the shared library with Python bindings
+make buildpython
 
 # Run the python script
 python3 tests/pythonTest.py
